@@ -3,196 +3,352 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Logo-Portfolio - Maya Tanaskovic</title>
+  <title>Logo-Portfolio – Maya Tanaskovic</title>
+
+  <!-- Seriöse, moderne Schrift -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --brand1:#006d7a;
-      --brand2:#1b9aaa;
-      --bg:#f9f9f9;
-      --text:#333;
-      --heading:#1f2937;
-      --card:#fff;
-      --shadow:rgba(0,0,0,.2);
-      --shadow2:rgba(0,0,0,.3);
-    }
-    *{box-sizing:border-box}
-    body{
-      font-family: Arial, Helvetica, sans-serif;
-      margin:0; padding:0;
-      background:var(--bg);
-      color:var(--text);
+      --brand1:#006d7a;    /* Tiefes Türkis */
+      --brand2:#1b9aaa;    /* Hell-Türkis/Blau */
+      --bg:#0f172a;        /* Tiefes Navy für Header */
+      --paper:#ffffff;     /* Karten/Fläche */
+      --ink:#0b1220;       /* Primärtext dunkel */
+      --muted:#6b7280;     /* Sekundärtext */
+      --ring:#e2e8f0;      /* Card-Border */
+      --ring-strong:#cbd5e1;
+      --shadow: 0 10px 30px rgba(2, 12, 27, .20);
+      --radius: 14px;
+      --maxw: 1180px;
     }
 
-    header{
-      background: linear-gradient(90deg, var(--brand1), var(--brand2));
+    *{ box-sizing: border-box }
+    html,body { margin:0; padding:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--ink); background:#f6f7fb; }
+
+    /* ===== Hero / Header ===== */
+    .hero{
+      background:
+        radial-gradient(1200px 500px at 50% -20%, rgba(27,154,170,.35), transparent 50%),
+        linear-gradient(90deg, var(--brand1), var(--brand2));
       color:#fff;
-      padding:42px 20px;
-      text-align:center;
+      padding: 56px 20px 64px;
+      position: relative;
+      overflow: hidden;
     }
-    header h1{margin:0; font-size:2.4rem; line-height:1.15}
-    header p{margin:10px 0 0; font-size:1.1rem; opacity:.95}
+    .hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(800px 300px at 80% -10%, rgba(255,255,255,.18), transparent 60%);
+      pointer-events:none;
+    }
+    .hero__inner{ max-width: var(--maxw); margin: 0 auto; text-align:center; position:relative; z-index:1; }
+    .eyebrow{
+      display:inline-block; letter-spacing:.14em; text-transform:uppercase; font-weight:700; font-size:.78rem;
+      background: rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.22); color:#f0f9ff;
+      padding:6px 10px; border-radius: 999px; backdrop-filter: blur(4px);
+    }
+    .hero h1{
+      margin: 16px 0 8px;
+      font-size: clamp(1.8rem, 4.2vw, 3rem);
+      line-height: 1.05;
+      letter-spacing: .2px;
+      background: linear-gradient(90deg, #ffffff, #e6fdff);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero p{
+      margin: 8px auto 24px;
+      max-width: 760px;
+      color:#e6f6f9;
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+    }
+    .cta{
+      display:inline-flex; gap:12px; flex-wrap:wrap; justify-content:center;
+    }
+    .btn{
+      appearance: none; border:1px solid rgba(255,255,255,.6); color:#0b1220;
+      background:#fff; padding:12px 16px; border-radius:12px; font-weight:700; text-decoration:none;
+      box-shadow: 0 5px 14px rgba(2,12,27,.18);
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); box-shadow: 0 10px 20px rgba(2,12,27,.24); }
+    .btn--ghost{
+      background: transparent; color:#fff; border-color: rgba(255,255,255,.55);
+    }
+    .btn--ghost:hover{ border-color:#fff; }
 
-    h2{
-      margin:34px auto 10px;
-      text-align:center;
-      color:var(--heading);
-      font-size:1.4rem;
-      font-weight:700;
-      max-width:1000px;
-      padding:0 16px;
+    /* ===== Sections ===== */
+    .section{
+      max-width: var(--maxw);
+      margin: 28px auto 10px;
+      padding: 0 16px;
+    }
+    .section__title{
+      display:flex; align-items:center; gap:14px; justify-content:center; text-align:center;
+      margin: 26px 0 12px;
+    }
+    .section__title h2{
+      margin:0; font-size: clamp(1.15rem, 2.2vw, 1.45rem); color:#111827; letter-spacing:.3px;
+    }
+    .section__rule{
+      width: 90px; height: 3px; border-radius:999px;
+      background: linear-gradient(90deg, var(--brand1), var(--brand2));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.2);
     }
 
-    .gallery{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap:16px;
-      padding:12px 20px 24px;
-      max-width:1000px;
-      margin:0 auto;
+    /* ===== Gallery Grid ===== */
+    .grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin: 12px 0 34px;
     }
     .card{
-      background:var(--card);
-      border-radius:12px;
-      box-shadow:0 2px 6px var(--shadow);
-      padding:10px;
-      cursor:pointer;
-      transition: transform .25s ease, box-shadow .25s ease;
-      text-align:center;
+      background: var(--paper);
+      border: 1px solid var(--ring);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 14px;
+      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+      cursor: pointer;
     }
-    .card:hover{
-      transform: scale(1.04);
-      box-shadow:0 8px 18px var(--shadow2);
+    .card:hover{ transform: translateY(-2px); border-color: var(--ring-strong); box-shadow: 0 16px 32px rgba(2,12,27,.18); }
+
+    /* Bildfläche: gleichmäßige Bühne für Logos (kein Beschneiden) */
+    .thumb{
+      background: #ffffff;
+      border: 1px solid var(--ring);
+      border-radius: 12px;
+      padding: 16px;
+      height: 180px;
+      display:flex; align-items:center; justify-content:center;
+      overflow: hidden;
     }
-    .card img{
-      width:100%;
-      height:auto;
-      border-radius:8px;
+    .thumb img{
+      max-width: 100%; max-height: 100%;
       transition: transform .25s ease;
     }
-    .card img:hover{
-      transform: scale(1.06);
+    .card:hover .thumb img{ transform: scale(1.06); }
+
+    .meta{
+      display:flex; align-items:center; justify-content:space-between; gap:8px;
+      margin-top:10px; padding:0 2px;
     }
-    .card p{
-      margin:8px 0 0;
-      font-size:.92rem;
-      font-weight:600;
-      color:#374151;
+    .title{ font-weight:700; font-size:.95rem; color:#111827; }
+    .tag{
+      font-size:.78rem; color:#374151; background:#f1f5f9; border:1px solid #e2e8f0; padding:4px 8px; border-radius:999px;
     }
 
+    /* ===== Lightbox ===== */
     .lightbox{
-      display:none;
-      position:fixed; inset:0;
-      z-index:1000;
-      background:rgba(0,0,0,.85);
-      justify-content:center;
-      align-items:center;
-      padding:24px;
+      position: fixed; inset:0; z-index: 1000; display:none;
+      background: rgba(0,0,0,.78); backdrop-filter: blur(3px);
+      align-items: center; justify-content: center; padding: 22px;
     }
     .lightbox.open{ display:flex; }
-
-    .lightbox__inner{
-      position:relative;
-      max-width:min(90vw, 1100px);
-      max-height:90vh;
-    }
+    .lightbox__inner{ position:relative; max-width:min(92vw, 1200px); max-height: 90vh; }
     .lightbox__img{
-      max-width:100%;
-      max-height:90vh;
-      border-radius:12px;
-      box-shadow:0 0 24px rgba(0,0,0,.5);
+      max-width: 100%; max-height: 90vh; border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+      background:#fff;
+      padding: 18px; /* weißer Rand fürs Logo */
     }
     .lightbox__close{
-      position:absolute;
-      top:-10px; right:-10px;
-      width:40px; height:40px;
-      border-radius:50%;
-      background:#000000cc;
-      color:#fff;
-      border:1px solid #ffffff33;
+      position:absolute; top:-14px; right:-14px; width:42px; height:42px;
+      border-radius:999px; border:1px solid rgba(255,255,255,.4);
+      background: rgba(0,0,0,.74); color:#fff; font-size:1.4rem; cursor:pointer;
       display:flex; align-items:center; justify-content:center;
-      font-size:1.4rem;
-      cursor:pointer;
+      transition: transform .2s ease, background .2s ease;
     }
-    .lightbox__close:hover{ background:#000000ee }
+    .lightbox__close:hover{ transform: scale(1.06); background: rgba(0,0,0,.9); }
 
+    /* ===== Footer ===== */
     footer{
-      text-align:center;
-      padding:22px 12px 30px;
-      color:#6b7280;
-      font-size:.95rem;
+      margin-top: 26px;
+      background:#ffffff;
+      border-top: 4px solid transparent;
+      background-image:
+        linear-gradient(#ffffff,#ffffff),
+        linear-gradient(90deg, var(--brand1), var(--brand2));
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+    }
+    .footer__inner{
+      max-width: var(--maxw); margin: 0 auto; padding: 18px 16px 28px;
+      display:flex; gap:12px; flex-wrap: wrap; align-items:center; justify-content:space-between;
+      color:#111827;
+    }
+    .foot-note{ color:var(--muted); font-size:.95rem; }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius:999px; border:1px solid #e2e8f0; background:#f8fafc; color:#0b1220; text-decoration:none; font-weight:600;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .pill:hover{ transform: translateY(-1px); box-shadow: 0 8px 18px rgba(2,12,27,.12); }
+
+    /* Bewegt sich weniger, wenn Nutzer das wünscht */
+    @media (prefers-reduced-motion: reduce){
+      .btn, .card, .thumb img, .lightbox__close { transition: none !important; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Begrüßung -->
-  <header>
-    <h1>Willkommen im Logo-Portfolio</h1>
-    <p>von <strong>Maya Tanaskovic</strong> – Entwürfe & Branding</p>
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div class="hero__inner">
+      <span class="eyebrow">Portfolio</span>
+      <h1>Willkommen im Logo-Portfolio</h1>
+      <p>von <strong>Maya Tanaskovic</strong> · Ausgewählte Entwürfe für Markenauftritte.  
+         Saubere Vektor-Logos, klare Typografie und Varianten für hell/dunkel.</p>
+      <div class="cta">
+        <a class="btn" href="#corazon">Zu Corazon-Logos</a>
+        <a class="btn btn--ghost" href="#kiassist">Zu KI-Assist-Logos</a>
+      </div>
+    </div>
   </header>
 
-  <!-- Corazon Logos -->
-  <h2>✨ Logos für Corazon GmbH</h2>
-  <div class="gallery">
-    <div class="card" data-src="images/corazon_file1.jpg"><img src="images/corazon_file1.jpg" alt="Corazon Logo 1"><p>Corazon Logo 1</p></div>
-    <div class="card" data-src="images/corazon_file2.jpg"><img src="images/corazon_file2.jpg" alt="Corazon Logo 2"><p>Corazon Logo 2</p></div>
-    <div class="card" data-src="images/corazon_file3.jpg"><img src="images/corazon_file3.jpg" alt="Corazon Logo 3"><p>Corazon Logo 3</p></div>
-    <div class="card" data-src="images/corazon_file4.jpg"><img src="images/corazon_file4.jpg" alt="Corazon Logo 4"><p>Corazon Logo 4</p></div>
-    <div class="card" data-src="images/corazon_file5.jpg"><img src="images/corazon_file5.jpg" alt="Corazon Logo 5"><p>Corazon Logo 5</p></div>
-    <div class="card" data-src="images/corazon_file6.jpg"><img src="images/corazon_file6.jpg" alt="Corazon Logo 6"><p>Corazon Logo 6</p></div>
-    <div class="card" data-src="images/corazon_file7.jpg"><img src="images/corazon_file7.jpg" alt="Corazon Logo 7"><p>Corazon Logo 7</p></div>
-    <div class="card" data-src="images/corazon_file8.jpg"><img src="images/corazon_file8.jpg" alt="Corazon Logo 8"><p>Corazon Logo 8</p></div>
-    <div class="card" data-src="images/corazon_file9.jpg"><img src="images/corazon_file9.jpg" alt="Corazon Logo 9"><p>Corazon Logo 9</p></div>
-    <div class="card" data-src="images/corazon_file10.jpg"><img src="images/corazon_file10.jpg" alt="Corazon Logo 10"><p>Corazon Logo 10</p></div>
-    <div class="card" data-src="images/corazon_file11.jpg"><img src="images/corazon_file11.jpg" alt="Corazon Logo 11"><p>Corazon Logo 11</p></div>
-    <div class="card" data-src="images/corazon_file12.jpg"><img src="images/corazon_file12.jpg" alt="Corazon Logo 12"><p>Corazon Logo 12</p></div>
-    <div class="card" data-src="images/corazon_file13.jpg"><img src="images/corazon_file13.jpg" alt="Corazon Logo 13"><p>Corazon Logo 13</p></div>
-  </div>
+  <!-- SECTION: Corazon -->
+  <section id="corazon" class="section">
+    <div class="section__title">
+      <div class="section__rule"></div>
+      <h2>✨ Logos für Corazon GmbH</h2>
+      <div class="section__rule"></div>
+    </div>
 
-  <!-- KI Assist Logos -->
-  <h2>🤖 Logos für KI Assist</h2>
-  <div class="gallery">
-    <div class="card" data-src="images/KIAsisst_01.png"><img src="images/KIAsisst_01.png" alt="KI Assist Logo 1"><p>KI Assist Logo 1</p></div>
-    <div class="card" data-src="images/KIAsisst_02.png"><img src="images/KIAsisst_02.png" alt="KI Assist Logo 2"><p>KI Assist Logo 2</p></div>
-    <div class="card" data-src="images/KIAsisst_03.png"><img src="images/KIAsisst_03.png" alt="KI Assist Logo 3"><p>KI Assist Logo 3</p></div>
-    <div class="card" data-src="images/KIAsisst_04.png"><img src="images/KIAsisst_04.png" alt="KI Assist Logo 4"><p>KI Assist Logo 4</p></div>
-  </div>
+    <div class="grid">
+      <!-- 13 Karten, Dateinamen wie besprochen -->
+      <div class="card" data-src="images/corazon_file1.jpg">
+        <div class="thumb"><img src="images/corazon_file1.jpg" alt="Corazon Logo 1"></div>
+        <div class="meta"><span class="title">Corazon · 01</span><span class="tag">Branding</span></div>
+      </div>
+      <div class="card" data-src="images/corazon_file2.jpg">
+        <div class="thumb"><img src="images/corazon_file2.jpg" alt="Corazon Logo 2"></div>
+        <div class="meta"><span class="title">Corazon · 02</span><span class="tag">Monochrom</span></div>
+      </div>
+      <div class="card" data-src="images/corazon_file3.jpg">
+        <div class="thumb"><img src="images/corazon_file3.jpg" alt="Corazon Logo 3"></div>
+        <div class="meta"><span class="title">Corazon · 03</span><span class="tag">Farbvariante</span></div>
+      </div>
+      <div class="card" data-src="images/corazon_file4.jpg">
+        <div class="thumb"><img src="images/corazon_file4.jpg" alt="Corazon Logo 4"></div>
+        <div class="meta"><span class="title">Corazon · 04</span><span class="tag">Typo</span></div>
+      </div>
+      <div class="card" data-src="images/corazon_file5.jpg">
+        <div class="thumb"><img src="images/corazon_file5.jpg" alt="Corazon Logo 5"></div>
+        <div class="meta"><span class="title">Corazon · 05</span><span class="tag">Icon</span></div>
+      </div>
+      <div class="card" data-src="images/corazon_file6.jpg">
+        <div class="thumb"><img src="images/corazon_file6.jpg" alt="Corazon Logo 6"></div>
+        <div class="meta"><span class="title">Corazon · 06</span><span class="tag">Dual</span></div>
+      </div>
+      <div class="card" data-src="images/corazon_file7.jpg">
+        <div class="thumb"><img src="images/corazon_file7.jpg" alt="Corazon Logo 7"></div>
+        <div class="meta"><span class="title">Corazon · 07</span><span class="tag">Negativ</span></div>
+      </div>
+      <div class="card" data-src="images/corazon_file8.jpg">
+        <div class="thumb"><img src="images/corazon_file8.jpg" alt="Corazon Logo 8"></div>
+        <div class="meta"><span class="title">Corazon · 08</span><span class="tag">Light</span></div>
+      </div>
+      <div class="card" data-src="images/corazon_file9.jpg">
+        <div class="thumb"><img src="images/corazon_file9.jpg" alt="Corazon Logo 9"></div>
+        <div class="meta"><span class="title">Corazon · 09</span><span class="tag">Dark</span></div>
+      </div>
+      <div class="card" data-src="images/corazon_file10.jpg">
+        <div class="thumb"><img src="images/corazon_file10.jpg" alt="Corazon Logo 10"></div>
+        <div class="meta"><span class="title">Corazon · 10</span><span class="tag">Flat</span></div>
+      </div>
+      <div class="card" data-src="images/corazon_file11.jpg">
+        <div class="thumb"><img src="images/corazon_file11.jpg" alt="Corazon Logo 11"></div>
+        <div class="meta"><span class="title">Corazon · 11</span><span class="tag">Bold</span></div>
+      </div>
+      <div class="card" data-src="images/corazon_file12.jpg">
+        <div class="thumb"><img src="images/corazon_file12.jpg" alt="Corazon Logo 12"></div>
+        <div class="meta"><span class="title">Corazon · 12</span><span class="tag">Outline</span></div>
+      </div>
+      <div class="card" data-src="images/corazon_file13.jpg">
+        <div class="thumb"><img src="images/corazon_file13.jpg" alt="Corazon Logo 13"></div>
+        <div class="meta"><span class="title">Corazon · 13</span><span class="tag">Marke</span></div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Lightbox -->
-  <div id="lightbox" class="lightbox">
+  <!-- SECTION: KI Assist -->
+  <section id="kiassist" class="section">
+    <div class="section__title">
+      <div class="section__rule"></div>
+      <h2>🤖 Logos für KI Assist</h2>
+      <div class="section__rule"></div>
+    </div>
+
+    <div class="grid">
+      <div class="card" data-src="images/KIAsisst_01.png">
+        <div class="thumb"><img src="images/KIAsisst_01.png" alt="KI Assist Logo 1"></div>
+        <div class="meta"><span class="title">KI Assist · 01</span><span class="tag">Branding</span></div>
+      </div>
+      <div class="card" data-src="images/KIAsisst_02.png">
+        <div class="thumb"><img src="images/KIAsisst_02.png" alt="KI Assist Logo 2"></div>
+        <div class="meta"><span class="title">KI Assist · 02</span><span class="tag">Mono</span></div>
+      </div>
+      <div class="card" data-src="images/KIAsisst_03.png">
+        <div class="thumb"><img src="images/KIAsisst_03.png" alt="KI Assist Logo 3"></div>
+        <div class="meta"><span class="title">KI Assist · 03</span><span class="tag">Variante</span></div>
+      </div>
+      <div class="card" data-src="images/KIAsisst_04.png">
+        <div class="thumb"><img src="images/KIAsisst_04.png" alt="KI Assist Logo 4"></div>
+        <div class="meta"><span class="title">KI Assist · 04</span><span class="tag">Negativ</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Logo-Großansicht">
     <div class="lightbox__inner">
-      <button class="lightbox__close" aria-label="Schließen">&times;</button>
+      <button class="lightbox__close" aria-label="Schließen" title="Schließen">&times;</button>
       <img id="lightbox-img" class="lightbox__img" src="" alt="Logo groß">
     </div>
   </div>
 
+  <!-- FOOTER -->
   <footer>
-    © 2025 Maya Tanaskovic · Kontakt: tanaskovicmaya@gmail.com
+    <div class="footer__inner">
+      <div class="foot-note">© 2025 Maya Tanaskovic — Logo-Entwürfe & Branding</div>
+      <div class="cta">
+        <a class="pill" href="mailto:tanaskovicmaya@gmail.com">📧 Mail: tanaskovicmaya@gmail.com</a>
+        <!-- Wenn du später willst, kannst du hier LinkedIn/Website verlinken -->
+        <!-- <a class="pill" href="https://dein-linkedin" target="_blank" rel="noreferrer">in LinkedIn</a> -->
+      </div>
+    </div>
   </footer>
 
   <script>
+    // Lightbox: öffnen
     const lb = document.getElementById('lightbox');
     const lbImg = document.getElementById('lightbox-img');
     const closeBtn = document.querySelector('.lightbox__close');
 
     document.querySelectorAll('.card').forEach(card => {
       card.addEventListener('click', () => {
-        lbImg.src = card.getAttribute('data-src');
+        const src = card.getAttribute('data-src');
+        lbImg.src = src;
         lb.classList.add('open');
+        lb.setAttribute('aria-hidden','false');
         document.body.style.overflow = 'hidden';
       });
     });
 
-    closeBtn.addEventListener('click', closeLightbox);
-    lb.addEventListener('click', (e) => { if(e.target === lb) closeLightbox(); });
-    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLightbox(); });
-
+    // Schließen (Button, Overlay, ESC)
     function closeLightbox(){
       lb.classList.remove('open');
+      lb.setAttribute('aria-hidden','true');
       lbImg.src = '';
       document.body.style.overflow = '';
     }
+    closeBtn.addEventListener('click', closeLightbox);
+    lb.addEventListener('click', (e) => { if(e.target === lb) closeLightbox(); });
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && lb.classList.contains('open')) closeLightbox(); });
   </script>
 </body>
 </html>
-
