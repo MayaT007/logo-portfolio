@@ -1,104 +1,125 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Logo-Portfolio - Maya Tanaskovic</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f9f9f9;
-      color: #333;
+    :root{
+      --brand1:#006d7a;
+      --brand2:#1b9aaa;
+      --bg:#f9f9f9;
+      --text:#333;
+      --heading:#1f2937;
+      --card:#fff;
+      --shadow:rgba(0,0,0,.2);
+      --shadow2:rgba(0,0,0,.3);
+    }
+    *{box-sizing:border-box}
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      margin:0; padding:0;
+      background:var(--bg);
+      color:var(--text);
     }
 
-    header {
-      background: linear-gradient(90deg, #006d7a, #1b9aaa);
-      color: white;
-      padding: 40px 20px;
-      text-align: center;
+    header{
+      background: linear-gradient(90deg, var(--brand1), var(--brand2));
+      color:#fff;
+      padding:42px 20px;
+      text-align:center;
+    }
+    header h1{margin:0; font-size:2.4rem; line-height:1.15}
+    header p{margin:10px 0 0; font-size:1.1rem; opacity:.95}
+
+    h2{
+      margin:34px auto 10px;
+      text-align:center;
+      color:var(--heading);
+      font-size:1.4rem;
+      font-weight:700;
+      max-width:1000px;
+      padding:0 16px;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 2.5em;
-    }
-
-    header p {
-      margin: 10px 0 0;
-      font-size: 1.2em;
-    }
-
-    h2 {
-      margin-top: 40px;
-      text-align: center;
-      color: #006d7a;
-    }
-
-    .gallery {
-      display: grid;
+    .gallery{
+      display:grid;
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 15px;
-      padding: 20px;
-      max-width: 1000px;
-      margin: auto;
+      gap:16px;
+      padding:12px 20px 24px;
+      max-width:1000px;
+      margin:0 auto;
+    }
+    .card{
+      background:var(--card);
+      border-radius:12px;
+      box-shadow:0 2px 6px var(--shadow);
+      padding:10px;
+      cursor:pointer;
+      transition: transform .25s ease, box-shadow .25s ease;
+      text-align:center;
+    }
+    .card:hover{
+      transform: scale(1.04);
+      box-shadow:0 8px 18px var(--shadow2);
+    }
+    .card img{
+      width:100%;
+      height:auto;
+      border-radius:8px;
+      transition: transform .25s ease;
+    }
+    .card img:hover{
+      transform: scale(1.06);
+    }
+    .card p{
+      margin:8px 0 0;
+      font-size:.92rem;
+      font-weight:600;
+      color:#374151;
     }
 
-    .card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      padding: 10px;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      text-align: center;
+    .lightbox{
+      display:none;
+      position:fixed; inset:0;
+      z-index:1000;
+      background:rgba(0,0,0,.85);
+      justify-content:center;
+      align-items:center;
+      padding:24px;
     }
+    .lightbox.open{ display:flex; }
 
-    .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    .lightbox__inner{
+      position:relative;
+      max-width:min(90vw, 1100px);
+      max-height:90vh;
     }
-
-    .card img {
-      max-width: 100%;
-      border-radius: 6px;
+    .lightbox__img{
+      max-width:100%;
+      max-height:90vh;
+      border-radius:12px;
+      box-shadow:0 0 24px rgba(0,0,0,.5);
     }
-
-    .card p {
-      margin: 8px 0 0;
-      font-size: 0.9em;
-      font-weight: bold;
+    .lightbox__close{
+      position:absolute;
+      top:-10px; right:-10px;
+      width:40px; height:40px;
+      border-radius:50%;
+      background:#000000cc;
+      color:#fff;
+      border:1px solid #ffffff33;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.4rem;
+      cursor:pointer;
     }
+    .lightbox__close:hover{ background:#000000ee }
 
-    /* Popup (Lightbox) */
-    .lightbox {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.8);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .lightbox img {
-      max-width: 80%;
-      max-height: 80%;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    }
-
-    .close {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 2em;
-      color: white;
-      cursor: pointer;
+    footer{
+      text-align:center;
+      padding:22px 12px 30px;
+      color:#6b7280;
+      font-size:.95rem;
     }
   </style>
 </head>
@@ -110,33 +131,68 @@
     <p>von <strong>Maya Tanaskovic</strong> – Entwürfe & Branding</p>
   </header>
 
-  <!-- Bundle 1 -->
+  <!-- Corazon Logos -->
   <h2>✨ Logos für Corazon GmbH</h2>
   <div class="gallery">
-    <div class="card"><img src="images/corazon logo final file1-3.jpg" alt="Corazon Logo 1"><p>Corazon Logo 1</p></div>
-    <div class="card"><img src="images/corazon logo final file2-3.jpg" alt="Corazon Logo 2"><p>Corazon Logo 2</p></div>
-    <div class="card"><img src="images/corazon logo final file3-3.jpg" alt="Corazon Logo 3"><p>Corazon Logo 3</p></div>
+    <div class="card" data-src="images/corazon_file1.jpg"><img src="images/corazon_file1.jpg" alt="Corazon Logo 1"><p>Corazon Logo 1</p></div>
+    <div class="card" data-src="images/corazon_file2.jpg"><img src="images/corazon_file2.jpg" alt="Corazon Logo 2"><p>Corazon Logo 2</p></div>
+    <div class="card" data-src="images/corazon_file3.jpg"><img src="images/corazon_file3.jpg" alt="Corazon Logo 3"><p>Corazon Logo 3</p></div>
+    <div class="card" data-src="images/corazon_file4.jpg"><img src="images/corazon_file4.jpg" alt="Corazon Logo 4"><p>Corazon Logo 4</p></div>
+    <div class="card" data-src="images/corazon_file5.jpg"><img src="images/corazon_file5.jpg" alt="Corazon Logo 5"><p>Corazon Logo 5</p></div>
+    <div class="card" data-src="images/corazon_file6.jpg"><img src="images/corazon_file6.jpg" alt="Corazon Logo 6"><p>Corazon Logo 6</p></div>
+    <div class="card" data-src="images/corazon_file7.jpg"><img src="images/corazon_file7.jpg" alt="Corazon Logo 7"><p>Corazon Logo 7</p></div>
+    <div class="card" data-src="images/corazon_file8.jpg"><img src="images/corazon_file8.jpg" alt="Corazon Logo 8"><p>Corazon Logo 8</p></div>
+    <div class="card" data-src="images/corazon_file9.jpg"><img src="images/corazon_file9.jpg" alt="Corazon Logo 9"><p>Corazon Logo 9</p></div>
+    <div class="card" data-src="images/corazon_file10.jpg"><img src="images/corazon_file10.jpg" alt="Corazon Logo 10"><p>Corazon Logo 10</p></div>
+    <div class="card" data-src="images/corazon_file11.jpg"><img src="images/corazon_file11.jpg" alt="Corazon Logo 11"><p>Corazon Logo 11</p></div>
+    <div class="card" data-src="images/corazon_file12.jpg"><img src="images/corazon_file12.jpg" alt="Corazon Logo 12"><p>Corazon Logo 12</p></div>
+    <div class="card" data-src="images/corazon_file13.jpg"><img src="images/corazon_file13.jpg" alt="Corazon Logo 13"><p>Corazon Logo 13</p></div>
   </div>
 
-  <!-- Bundle 2 -->
+  <!-- KI Assist Logos -->
   <h2>🤖 Logos für KI Assist</h2>
   <div class="gallery">
-    <div class="card"><img src="images/KI Asisst-01.png" alt="KI Assist Logo 1"><p>KI Assist Logo 1</p></div>
-    <div class="card"><img src="images/KI Asisst-02.png" alt="KI Assist Logo 2"><p>KI Assist Logo 2</p></div>
-    <div class="card"><img src="images/KI Asisst-03.png" alt="KI Assist Logo 3"><p>KI Assist Logo 3</p></div>
-    <div class="card"><img src="images/KI Asisst-04.png" alt="KI Assist Logo 4"><p>KI Assist Logo 4</p></div>
+    <div class="card" data-src="images/KIAsisst_01.png"><img src="images/KIAsisst_01.png" alt="KI Assist Logo 1"><p>KI Assist Logo 1</p></div>
+    <div class="card" data-src="images/KIAsisst_02.png"><img src="images/KIAsisst_02.png" alt="KI Assist Logo 2"><p>KI Assist Logo 2</p></div>
+    <div class="card" data-src="images/KIAsisst_03.png"><img src="images/KIAsisst_03.png" alt="KI Assist Logo 3"><p>KI Assist Logo 3</p></div>
+    <div class="card" data-src="images/KIAsisst_04.png"><img src="images/KIAsisst_04.png" alt="KI Assist Logo 4"><p>KI Assist Logo 4</p></div>
   </div>
 
-  <!-- Bundle 3 -->
-  <h2>🎨 Weitere Logo-Entwürfe</h2>
-  <div class="gallery">
-    <div class="card"><img src="images/logo1.png" alt="Logo Entwurf 1"><p>Entwurf 1</p></div>
-    <div class="card"><img src="images/logo2.png" alt="Logo Entwurf 2"><p>Entwurf 2</p></div>
-    <div class="card"><img src="images/logo3.png" alt="Logo Entwurf 3"><p>Entwurf 3</p></div>
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <div class="lightbox__inner">
+      <button class="lightbox__close" aria-label="Schließen">&times;</button>
+      <img id="lightbox-img" class="lightbox__img" src="" alt="Logo groß">
+    </div>
   </div>
+
   <footer>
-    © 2025 [Maya Tanaskovic] · Kontakt: tanaskovicmaya@gmail.com
+    © 2025 Maya Tanaskovic · Kontakt: tanaskovicmaya@gmail.com
   </footer>
+
+  <script>
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.lightbox__close');
+
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('click', () => {
+        lbImg.src = card.getAttribute('data-src');
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+    lb.addEventListener('click', (e) => { if(e.target === lb) closeLightbox(); });
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLightbox(); });
+
+    function closeLightbox(){
+      lb.classList.remove('open');
+      lbImg.src = '';
+      document.body.style.overflow = '';
+    }
+  </script>
 </body>
 </html>
 
