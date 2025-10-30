@@ -52,6 +52,7 @@
       padding: 10px;
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
     }
 
     .card:hover {
@@ -68,10 +69,9 @@
       margin: 8px 0 0;
       font-size: 0.9em;
       font-weight: bold;
-      text-align: center;
     }
 
-    /* Lightbox */
+    /* Popup (Lightbox) */
     .lightbox {
       display: none;
       position: fixed;
@@ -92,17 +92,13 @@
       box-shadow: 0 0 20px rgba(0,0,0,0.5);
     }
 
-    .lightbox:target {
-      display: flex;
-    }
-
     .close {
       position: absolute;
       top: 20px;
       right: 30px;
       font-size: 2em;
       color: white;
-      text-decoration: none;
+      cursor: pointer;
     }
   </style>
 </head>
