@@ -3,32 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Logo-Portfolio</title>
+  <title>Logo-Portfolio - Maya Tanaskovic</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
       background: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(90deg, #006d7a, #1b9aaa);
+      color: white;
+      padding: 40px 20px;
       text-align: center;
     }
 
-    /* Überschrift mit Farbverlauf wie im Lebenslauf */
-    h1 {
-      background: linear-gradient(90deg, #006d7a, #1b9aaa);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-size: 2.8em;
-      font-weight: bold;
-      margin: 20px 0;
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+
+    header p {
+      margin: 10px 0 0;
+      font-size: 1.2em;
+    }
+
+    h2 {
+      margin-top: 40px;
+      text-align: center;
+      color: #006d7a;
     }
 
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 15px;
       padding: 20px;
-      max-width: 1200px;
+      max-width: 1000px;
       margin: auto;
     }
 
@@ -36,60 +49,63 @@
       background: white;
       border-radius: 10px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      padding: 15px;
+      padding: 10px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    /* Hover-Effekt auf der Karte */
     .card:hover {
       transform: scale(1.05);
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
 
-    /* Bilder Styling */
     .card img {
       max-width: 100%;
-      height: auto;
-      border-radius: 8px;
+      border-radius: 6px;
       transition: transform 0.3s ease;
     }
 
-    /* Bild vergrößert sich beim Hover */
     .card img:hover {
-      transform: scale(1.1);
+      transform: scale(1.08);
     }
 
-    p {
-      margin-top: 10px;
+    .card p {
+      margin: 8px 0 0;
+      font-size: 0.9em;
       font-weight: bold;
-      color: #333;
+      text-align: center;
     }
   </style>
 </head>
 <body>
+
+  <!-- Begrüßung -->
   <header>
-    <h1>Logo-Portfolio</h1>
-    <p>Entwürfe & Branding – erstellt von [Maya Tanaskovic]</p>
+    <h1>Willkommen im Logo-Portfolio</h1>
+    <p>von <strong>Maya Tanaskovic</strong> – Entwürfe & Branding</p>
   </header>
 
-  <main class="grid">
-    <div class="card">
-      <img src="images/KI Asisst-01.png" alt="Logo-Entwurf 1">
-      <p>Logo-Entwurf 1</p>
-    </div>
-    <div class="card">
-      <img src="images/KI Asisst-02.png" alt="Logo-Entwurf 2">
-      <p>Logo-Entwurf 2</p>
-    </div>
-    <div class="card">
-      <img src="images/KI Asisst-03.png" alt="Logo-Entwurf 3">
-      <p>Logo-Entwurf 3</p>
-    </div>
-     <div class="card">
-      <img src="images/KI Asisst-04.png" alt="Logo-Entwurf 4">
-      <p>Logo-Entwurf 4</p>
-  </main>
+  <!-- Bundle 1 -->
+  <h2>✨ Logos für Corazon GmbH</h2>
+  <div class="gallery">
+    <div class="card"><img src="images/corazon1.png" alt="Corazon Logo 1"><p>Corazon Logo 1</p></div>
+    <div class="card"><img src="images/corazon2.png" alt="Corazon Logo 2"><p>Corazon Logo 2</p></div>
+    <div class="card"><img src="images/corazon3.png" alt="Corazon Logo 3"><p>Corazon Logo 3</p></div>
+  </div>
 
+  <!-- Bundle 2 -->
+  <h2>🤖 Logos für KI Assist</h2>
+  <div class="gallery">
+    <div class="card"><img src="images/ki1.png" alt="KI Assist Logo 1"><p>KI Assist Logo 1</p></div>
+    <div class="card"><img src="images/ki2.png" alt="KI Assist Logo 2"><p>KI Assist Logo 2</p></div>
+  </div>
+
+  <!-- Bundle 3 -->
+  <h2>🎨 Weitere Logo-Entwürfe</h2>
+  <div class="gallery">
+    <div class="card"><img src="images/logo1.png" alt="Logo Entwurf 1"><p>Entwurf 1</p></div>
+    <div class="card"><img src="images/logo2.png" alt="Logo Entwurf 2"><p>Entwurf 2</p></div>
+    <div class="card"><img src="images/logo3.png" alt="Logo Entwurf 3"><p>Entwurf 3</p></div>
+  </div>
   <footer>
     © 2025 [Maya Tanaskovic] · Kontakt: tanaskovicmaya@gmail.com
   </footer>
